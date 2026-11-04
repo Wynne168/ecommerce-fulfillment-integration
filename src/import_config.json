@@ -1,0 +1,9 @@
+{
+    "database_url": "mysql+pymysql://username:password@localhost:3306/ecommerce_fulfillment",
+    "data_dir": "data/raw",
+    "charset": "utf8mb4",
+    "import_order": [
+        "customers", "sellers", "products", "geolocation",
+        "orders", "order_items", "order_payments", "reviews"
+    ]
+}

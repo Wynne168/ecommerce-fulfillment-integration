@@ -1,0 +1,3 @@
+{
+    "database_url": "mysql+pymysql://username:password@localhost:3306/ecommerce_fulfillment_test"
+}

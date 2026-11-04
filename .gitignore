@@ -1,0 +1,53 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+venv/
+env/
+.venv/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# ===== 数据库密码 / 敏感配置 =====
+# 如需提交配置模板，请另存 *.example.json，真实密码文件不上传
+src/import_config.local.json
+tests/test_config.local.json
+*.local.json
+*.env
+.env
+*.secret
+
+# ===== Olist 原始数据集（体量大，不入库）=====
+data/raw/*.csv
+data/raw/*.zip
+data/raw/*.gz
+!**/data/raw/*.md
+!**/data/raw/README*
+
+# ===== 数据库本地数据目录 =====
+mysql_data/
+db_data/
+*.ibd
+*.ibdata1
+
+# ===== 日志 / 临时 =====
+*.log
+logs/
+tmp/
+temp/
+*.bak
+*.tmp
+
+# ===== 操作系统 / 编辑器 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
