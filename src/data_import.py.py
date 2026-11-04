@@ -113,11 +113,12 @@ def load_config(config_path="src/import_config.json"):
 
 
 def truncate_table(engine, table_name):
-    """清空表数据（幂等导入）"""
+    """清空表数据 (导入前) """
     with engine.begin() as conn:
-        conn.execute(text(f"TRUNCATE TABLE {table_name}"))
+        conn.execute(text("SET FOREIGN_KEY_CHECKS=0")) # 临时关闭外键检查
+        conn.execute(text(f"TRUNCATE TABLE {table_name}")) # 清空表
+        conn.execute(text("SET FOREIGN_KEY_CHECKS=1")) # 重新开启外键检查
     logger.info(f"已清空表: {table_name}")
-
 
 def import_csv_to_table(engine, table_name, data_dir, config):
     """将CSV文件导入到数据库表"""
@@ -129,7 +130,7 @@ def import_csv_to_table(engine, table_name, data_dir, config):
     
     # 读取CSV
     dtype_dict = config.get("dtype", {})
-    df = pd.read_csv(csv_path, dtype=dtype_dict, na_values=["null", "null", ""], encoding="utf-8")
+    df = pd.read_csv(csv_path, dtype=str, encoding="utf-8")
     
     # 处理日期列
     for col in config.get("date_cols", []):
@@ -142,7 +143,12 @@ def import_csv_to_table(engine, table_name, data_dir, config):
             df[col] = df[col].str.strip()
     
     record_count = len(df)
-    
+
+        # 智能去重：如果表有主键，就按主键去重
+    if 'geolocation_zip_code_prefix' in df.columns:
+        df.drop_duplicates(subset=['geolocation_zip_code_prefix'], keep='first', inplace=True)
+    elif 'review_id' in df.columns:
+        df.drop_duplicates(subset=['review_id'], keep='first', inplace=True)
     # 写入数据库
     df.to_sql(table_name, engine, if_exists="append", index=False)
     

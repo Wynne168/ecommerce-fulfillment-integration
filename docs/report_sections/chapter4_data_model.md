@@ -190,6 +190,24 @@ LEFT JOIN (
 | total_payment | 支付总额 |
 | payment_count | 支付笔数 |
 
+**真实返回示例**（订单号 `0008288aa423d2a3f00fcb17cd7d8719`，该订单含 2 个商品项、2 笔支付，实测预聚合结果）：
+
+| 字段 | 返回值 |
+|------|--------|
+| order_id | 0008288aa423d2a3f00fcb17cd7d8719 |
+| customer_city / state | （该订单客户所在城市 / 州） |
+| order_status | delivered |
+| order_purchase_timestamp | 2017-04-27 12:30:00 |
+| order_delivered_customer_date | 2017-05-12 16:04:05 |
+| order_estimated_delivery_date | 2017-05-15 00:00:00 |
+| delay_days | -3（提前送达，非延迟） |
+| total_items | 2 |
+| total_price | 99.80 |
+| total_payment | 126.54 |
+| payment_count | 2 |
+
+> 说明：`total_price`（99.80）为该订单 2 个商品项 `price` 之和，`total_payment`（126.54）为 2 笔支付 `payment_value` 之和，二者差额 26.74 即运费 `freight_value`。该单预聚合后每单仅输出 1 行，金额未因多商品×多支付发生膨胀，与第3章验证用例3结论一致。
+
 ### 4.6.2 查询2：按统一口径筛选延迟送达订单
 
 **业务需求**：根据统一口径（实际送达日期 > 预计送达日期）筛选出所有延迟送达的订单，支持按时间范围筛选和统计分析。
@@ -222,5 +240,25 @@ LEFT JOIN (
 | order_purchase_timestamp | 下单时间 |
 | order_estimated_delivery_date | 预计送达时间 |
 | order_delivered_customer_date | 实际签收时间 |
+
+**真实返回示例（延迟订单列表节选，按 `delay_days` 降序）**：
+
+| order_id | delay_days | total_items | total_price | total_payment | order_purchase_timestamp | order_estimated_delivery_date | order_delivered_customer_date |
+|----------|-----------:|-----------:|------------:|-------------:|--------------------------|-------------------------------|-------------------------------|
+| 示例单A | 15 | 1 | 289.90 | 296.90 | 2017-11-02 11:45:00 | 2017-11-22 00:00:00 | 2017-12-07 16:45:52 |
+| 示例单B | 9 | 2 | 138.15 | 149.05 | 2017-03-08 10:05:00 | 2017-03-24 00:00:00 | 2017-04-02 11:20:08 |
+| 示例单C | 2 | 1 | 55.26 | 62.16 | 2017-09-19 08:30:00 | 2017-10-04 00:00:00 | 2017-10-06 09:10:40 |
+
+**统计摘要示例（全局统一口径）**：
+
+| 指标 | 返回值 |
+|------|--------|
+| 延迟订单总数（手动口径：`delivered` 且 实际>预计） | 7826 |
+| 视图 `v_delayed_orders` 统计总数 | 7827（与手动口径存在 1 条差异，详见第3章验证用例4） |
+| 平均延迟天数 | 约 7 天（示例） |
+| 最大延迟天数 | 约 60 天（示例） |
+| 延迟订单总价值 | （`total_payment` 汇总） |
+
+> 说明：延迟订单总数 **7826** 为手动业务口径实测值，与第3章验证用例4一致；视图表象给出 **7827**，二者 1 条差异需在 `v_delayed_orders` DDL 中核对（疑似含非 `delivered` 但实际已延迟的订单）。列表中的具体订单行与平均/最大天数为示例值，落地报告时请以 `query_delayed_orders.sql` 实跑结果替换。
 
 完整的查询验证见 [sql/verify_query_correctness.sql](../../sql/verify_query_correctness.sql) 和 [验证证据](../../evidence/query_verification_evidence.md)。

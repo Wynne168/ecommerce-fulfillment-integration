@@ -14,15 +14,15 @@
 
 | 文件名 | 表名 | 记录数（约） | 字段数 | 说明 |
 |--------|------|-------------|--------|------|
-| olist_orders_dataset.csv | orders | 100,000+ | 8 | 订单主表，记录订单状态与时间戳 |
-| olist_order_items_dataset.csv | order_items | 113,000+ | 7 | 订单明细表，记录每笔订单中的商品 |
-| olist_customers_dataset.csv | customers | 99,400+ | 5 | 客户信息表 |
-| olist_sellers_dataset.csv | sellers | 2,000+ | 4 | 卖家/商家信息表 |
-| olist_products_dataset.csv | products | 31,000+ | 9 | 商品信息表 |
-| olist_order_payments_dataset.csv | order_payments | 104,000+ | 5 | 订单支付记录表 |
-| olist_order_reviews_dataset.csv | reviews | 100,000+ | 7 | 客户评价表 |
-| olist_geolocation_dataset.csv | geolocation | 1,000,000+ | 5 | 巴西邮政编码地理坐标表 |
-| product_category_name_translation.csv | - | - | 2 | 商品分类名称翻译表 |
+| olist_orders_dataset.csv | orders | 99441 | 8 | 订单主表，记录订单状态与时间戳 |
+| olist_order_items_dataset.csv | order_items | 112650| 7 | 订单明细表，记录每笔订单中的商品 |
+| olist_customers_dataset.csv | customers | 99,441 | 5 | 客户信息表 |
+| olist_sellers_dataset.csv | sellers | 3049 | 4 | 卖家/商家信息表 |
+| olist_products_dataset.csv | products | 32951 | 9 | 商品信息表 |
+| olist_order_payments_dataset.csv | order_payments | 103866 | 5 | 订单支付记录表 |
+| olist_order_reviews_dataset.csv | reviews | 100,000 | 7 | 客户评价表 |
+| olist_geolocation_dataset.csv | geolocation | 1,000,163 | 5 | 巴西邮政编码地理坐标表 |
+| product_category_name_translation.csv | 71 | - | 2 | 商品分类名称翻译表 |
 
 ### 2.3.3 数据类型
 

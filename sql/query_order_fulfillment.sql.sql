@@ -5,7 +5,7 @@
 -- ============================================
 
 -- 查询参数：将 'order_id_value' 替换为实际订单号
-SET @target_order_id = 'order_id_value';
+SET @target_order_id = '2e7a8482f6fb09756ca50c10d7bfc047';
 
 -- 方式一：详细视图（含所有明细，一单多商品/多支付时会有重复行）
 SELECT

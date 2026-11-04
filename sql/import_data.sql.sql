@@ -45,7 +45,7 @@ IGNORE 1 LINES
 -- ============================================
 TRUNCATE TABLE products;
 
-LOAD DATA INFILE '/path/to/data/raw/olist_products_dataset.csv'
+LOAD DATA INFILE 'F:/Assignment/data/raw/olist_orders_dataset.csv'
 INTO TABLE products
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'

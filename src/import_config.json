@@ -1,5 +1,5 @@
 {
-    "database_url": "mysql+pymysql://username:password@localhost:3306/ecommerce_fulfillment",
+    "database_url": "mysql+pymysql://root:123456@localhost:3306/ecommerce_fulfillment",
     "data_dir": "data/raw",
     "charset": "utf8mb4",
     "import_order": [
