@@ -42,7 +42,6 @@ tests/test_queries.py
 
 ## 7.3.4 验证方法执行结果与截图说明
 
-以下结果均为 2026年11月4日在 MySQL 8.0 上、基于 Brazilian E-Commerce Public Dataset by Olist 实际执行得到；各小节「截图说明」标注了对应截图文件名与内容，请将实际运行截图插入到该处。
 
 ### 一、样例核对执行结果
 
@@ -58,7 +57,7 @@ tests/test_queries.py
 
 结论：样例订单的订单、商品、支付、配送、客户、卖家信息均正确关联，金额与原始记录一致。
 
-截图说明：截图 `样例核对_履约详情.png` 展示 `query_order_fulfillment.sql` 针对该订单返回的单行结果（total_items=2、total_price=99.80、total_payment=126.54、payment_count=2）。
+截图说明：截图 ![alt text](217242fe898e9f53f4e287cdd7ee744.png) 展示 `query_order_fulfillment.sql` 针对该订单返回的单行结果（total_items=2、total_price=99.80、total_payment=126.54、payment_count=2）。
 
 ### 二、交叉验证执行结果
 
@@ -72,11 +71,11 @@ tests/test_queries.py
 |---|---|---|---|
 | 延迟订单数 | 7826 | 7827 | 存在 1 条口径差异，待排查视图定义 |
 
-截图说明：截图 `交叉验证_延迟订单.png` 展示两条统计 SQL 的返回值对照（7826 与 7827）。
+截图说明：截图 ![alt text](a9e4e2d1e12a44dbc71e0d11e894bbd-3.png)展示两条统计 SQL 的返回值对照（7826 与 7827）。
 
 补充证据（多商品×多支付订单的直接 JOIN 与预聚合对比）：直接三表 JOIN 时 `SUM(payment_value)=253.08`（数据膨胀），预聚合后为 `126.54`（正确），证明多对多关联必须先预聚合。
 
-截图说明：截图 `交叉验证_预聚合对比.png` 展示直接 JOIN 与预聚合两种写法的金额对比结果。
+截图说明：截图![alt text](4ac3eb61b12a723fb3ecc06424d52bd-4.png) 展示直接 JOIN 与预聚合两种写法的金额对比结果。
 
 ### 三、单元测试验证执行结果
 
@@ -90,7 +89,7 @@ tests/test_queries.py
 | 用例4 延迟订单口径 | 计数一致 | 手动 7826 条 vs 视图 7827 条 | 不通过 |
 | 用例5 数据完整性 | 无孤立记录 | 孤立记录 0，金额差异≤0.02 | 通过 |
 
-截图说明：截图 `单元测试输出.png` 展示 pytest 终端输出（用例1、2、5 PASSED，用例3、4 FAILED，与上表一致）。
+截图说明：截图![alt text](38d22a57141bdd71a586ccc101c76e6-1.png) 展示 pytest 终端输出（用例1、2、5 PASSED，用例3、4 FAILED，与上表一致）。
 
 ### 执行结果小结
 
