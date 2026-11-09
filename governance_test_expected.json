@@ -1,0 +1,98 @@
+{
+    "_label": "【测试数据】组员C合成的治理测试数据，全部ID以 TEST_GOV_ 开头，非真实 Olist 数据，仅用于触发并验证质量/可观测性规则。不得混入正式库 ecommerce_fulfillment。",
+    "_written_before_run": "本预期文件在首次运行测试前编写（2026-11-09），按测试数据逐行推导。",
+    "test_database": "ecommerce_fulfillment_govtest",
+    "scenario_A_quality": {
+        "description": "完整测试数据集 DATA/TEST，一次运行同时触发重复键、关联失败、条件缺失、时间矛盾、域值、一致性、口径规则",
+        "expected_failed_rows": {
+            "DUP-01": {"count": 1, "keys": ["TEST_GOV_O02"], "why": "orders 第8行重复第2行"},
+            "DUP-02": {"count": 1, "keys": ["TEST_GOV_C01"], "why": "customers 第11行重复第1行"},
+            "DUP-03": {"count": 1, "keys": ["TEST_GOV_O07#1"], "why": "order_items 第8行重复第7行"},
+            "DUP-04": {"count": 1, "keys": ["TEST_GOV_O13#1"], "why": "order_payments 第13行重复第12行"},
+            "DUP-05": {"count": 1, "keys": ["TEST_GOV_R02"], "why": "同一 review_id 关联 O02 与 O03"},
+            "DUP-06": {"count": 0, "keys": []},
+            "DUP-07": {"count": 0, "keys": []},
+            "DUP-08": {"count": 1, "keys": ["01001"], "why": "邮编 01001 两行坐标"},
+            "REF-01": {"count": 1, "keys": ["TEST_GOV_O99#1"], "why": "明细引用不存在的订单 O99"},
+            "REF-02": {"count": 0, "keys": []},
+            "REF-03": {"count": 1, "keys": ["TEST_GOV_O10#2"], "why": "明细引用不存在的卖家 S99"},
+            "REF-04": {"count": 1, "keys": ["TEST_GOV_O98#1"], "why": "支付引用不存在的订单 O98"},
+            "REF-05": {"count": 1, "keys": ["TEST_GOV_R04"], "why": "评价引用不存在的订单 O98"},
+            "REF-06": {"count": 1, "keys": ["TEST_GOV_O09"], "why": "订单引用不存在的客户 C99"},
+            "REF-07": {"count": 1, "keys": ["TEST_GOV_O12"], "why": "订单 O12 无明细"},
+            "REF-08": {"count": 1, "keys": ["TEST_GOV_O12"], "why": "订单 O12 无支付"},
+            "REF-09": {"count": 1, "keys": ["TEST_GOV_C09"], "why": "邮编 99999 无坐标"},
+            "REF-10": {"count": 0, "keys": []},
+            "REF-11": {"count": 1, "keys": ["TEST_GOV_P03"], "why": "品类 categoria_inexistente 无翻译"},
+            "NUL-01": {"count": 1, "keys": ["TEST_GOV_O05"], "why": "delivered 但签收时间为空"},
+            "NUL-02": {"count": 0, "keys": []},
+            "NUL-03": {"count": 0, "keys": []},
+            "NUL-04": {"count": 1, "keys": ["TEST_GOV_O04"], "why": "canceled 却有签收时间"},
+            "NUL-05": {"count": 1, "keys": ["TEST_GOV_O13"], "why": "预计送达日期为空"},
+            "NUL-06": {"count": 1, "keys": ["TEST_GOV_O14"], "why": "下单时间为空"},
+            "NUL-07": {"count": 1, "keys": ["TEST_GOV_P02"], "why": "品类为空"},
+            "TIM-01": {"count": 0, "keys": []},
+            "TIM-02": {"count": 1, "keys": ["TEST_GOV_O06"], "why": "交承运 01-01 早于下单 01-02"},
+            "TIM-03": {"count": 1, "keys": ["TEST_GOV_O06"], "why": "交承运早于支付批准"},
+            "TIM-04": {"count": 1, "keys": ["TEST_GOV_O07"], "why": "签收 01-05 早于交承运 01-06"},
+            "TIM-05": {"count": 0, "keys": []},
+            "TIM-06": {"count": 0, "keys": []},
+            "TIM-07": {"count": 1, "keys": ["TEST_GOV_R05"], "why": "评价 01-01 早于下单 01-02"},
+            "TIM-08": {"count": 1, "keys": ["TEST_GOV_R06"], "why": "回复早于评价"},
+            "DOM-01": {"count": 1, "keys": ["TEST_GOV_O11"], "why": "状态 lost 不在域内"},
+            "DOM-02": {"count": 1, "keys": ["TEST_GOV_O11#2"], "why": "payment_type = not_defined"},
+            "DOM-03": {"count": 1, "keys": ["TEST_GOV_O11#2"], "why": "payment_value = 0"},
+            "DOM-04": {"count": 1, "keys": ["TEST_GOV_O06#1"], "why": "分期数 0"},
+            "DOM-05": {"count": 1, "keys": ["TEST_GOV_O11#2"], "why": "price = -5.00"},
+            "DOM-06": {"count": 1, "keys": ["TEST_GOV_R03"], "why": "评分 7"},
+            "DOM-07": {"count": 1, "keys": ["TEST_GOV_O10"], "why": "批准时间 2018-02-30 非法"},
+            "DOM-08": {"count": 1, "keys": ["TEST_GOV_P04"], "why": "重量 0"},
+            "DOM-09": {"count": 1, "keys": ["TEST_GOV_C09"], "why": "州代码小写 sp"},
+            "CON-01": {"count": 2, "keys": ["TEST_GOV_O07", "TEST_GOV_O13"], "why": "O07 因重复明细金额翻倍；O13 支付 100+100 vs 商品 38.5"},
+            "CON-02": {"count": 1, "keys": ["TEST_GOV_O03"], "why": "当天 15:30 签收，晚于预计 00:00 但 DATEDIFF=0"}
+        },
+        "expected_quarantine_by_rule": {
+            "DUP-01": 1, "DUP-02": 1, "DUP-03": 1, "DUP-04": 1, "DUP-05": 1,
+            "REF-01": 1, "REF-03": 1, "REF-04": 1, "REF-05": 1, "REF-06": 1,
+            "NUL-06": 1, "DOM-05": 1, "CAS-01": 5
+        },
+        "expected_core_rows": {
+            "customers": 10, "sellers": 2, "products": 4, "geolocation": 2,
+            "orders": 11, "order_items": 10, "order_payments": 11, "reviews": 5
+        },
+        "expected_observability": {
+            "OBS-ROW-01 sellers": "ALERT（源 3 行、暂存 2 行：第3条记录只有3列）",
+            "OBS-ROW-02 all tables": "OK（核心行数 = 暂存 - 隔离）",
+            "OBS-QUA-01 ALERT rules": ["DOM-01", "DOM-05", "DOM-07", "DUP-01", "DUP-02", "DUP-03", "DUP-04",
+                                       "NUL-05", "NUL-06", "REF-01", "REF-03", "REF-04", "REF-05", "REF-06"],
+            "pipeline_status": "partial"
+        },
+        "expected_lineage": {
+            "governed_delayed_orders": {"TEST_GOV_O02": 5, "TEST_GOV_O07": 2},
+            "TEST_GOV_O07_flag_rules": "CON-01,TIM-04",
+            "a_view_v_delayed_orders_count": 4,
+            "a_view_extra_orders": ["TEST_GOV_O03 (delay_days=0)", "TEST_GOV_O04 (canceled)"],
+            "trace_TEST_GOV_O02": {"src_row_num": 2, "csv_line_no": 3, "raw_delivered_customer_date": "2018-01-15 10:00:00",
+                                   "raw_estimated_delivery_date": "2018-01-10 00:00:00"},
+            "geolocation_01001_avg": {"lat": -23.551, "lng": -46.632}
+        }
+    },
+    "scenario_B_run_failure": {
+        "description": "复制测试数据但删除 olist_products_dataset.csv，模拟源文件缺失导致的运行失败",
+        "expected": {
+            "stage_load.products": "failed",
+            "OBS-RUN-03 products": "ALERT",
+            "OBS-RUN-01 stage_load.products": "ALERT",
+            "pipeline_status": "failed",
+            "quality_check_summary rows for batch": 0,
+            "core orders rows": "保持场景A结果 11 行（失败批次不覆盖核心表）"
+        }
+    },
+    "scenario_C_row_drift": {
+        "description": "复制测试数据但 orders 只保留前 7 条记录（O01-O07），模拟源文件被截断",
+        "expected": {
+            "OBS-ROW-03 orders": "ALERT（14 -> 7，-50%，对比上一成功批次=场景A）",
+            "pipeline_status": "partial"
+        }
+    }
+}
