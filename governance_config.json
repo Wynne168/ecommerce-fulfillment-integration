@@ -1,0 +1,31 @@
+{
+    "_comment": "组员C治理流水线配置。密码不写入文件，从环境变量 password_env 读取；路径为本机路径，换机器时修改 data_dir / core_ddl / mysql_bin。",
+    "mysql_bin": "C:/Program Files/MySQL/MySQL Server 8.0/bin/mysql.exe",
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password_env": "GOV_DB_PASSWORD",
+    "database": "ecommerce_fulfillment",
+    "data_dir": "C:/Users/ASUS/Desktop/courses/Databased system/archive",
+    "core_ddl": "C:/Users/ASUS/Desktop/courses/MYSQL/SQL/create_tables.sql.sql",
+    "evidence_dir": "../../EVIDENCE/run_outputs",
+    "detail_cap_per_rule": 1000,
+    "row_drift_warn": 0.05,
+    "row_drift_alert": 0.20,
+    "quality_drift_warn": 0.50,
+    "metric_drift_warn": 0.10,
+    "stuck_running_minutes": 30,
+    "freshness_hours": 24,
+    "baseline_row_counts": {
+        "_source": "dataREADME.md 数据规模表（组员A）",
+        "orders": 99441,
+        "order_items": 112650,
+        "order_payments": 103886,
+        "reviews": 99224,
+        "products": 32951,
+        "customers": 99441,
+        "sellers": 3095,
+        "geolocation": 1000163,
+        "category_translation": 71
+    }
+}
