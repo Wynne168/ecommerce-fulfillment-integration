@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="670" viewBox="0 0 1100 670">
+<rect width="1100" height="670" fill="#f5f7fb"/>
+<style>text{font-family:'Microsoft YaHei','Segoe UI',sans-serif;fill:#243245}.title{font-size:25px;font-weight:700}.label{font-size:17px;font-weight:700}.small{font-size:14px}.muted{fill:#536375}.box{fill:white;stroke:#cad4e3;stroke-width:1.5}.arrow{stroke:#5075bc;stroke-width:2;fill:none;marker-end:url(#arr)}</style>
+<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#5075bc"/></marker></defs>
+<text x="42" y="48" class="title">延迟天数：一条实际订单的完整血缘</text>
+<text x="42" y="78" class="small muted">订单 01cbdb2a8c075eaf248af643b3389f73 · 批次 batch_20261109_223909 · C本地验证</text>
+<rect class="box" x="42" y="112" width="306" height="150" rx="10"/>
+<text x="60" y="144" class="label">1. 原始CSV（A字段语义）</text>
+<text x="60" y="171" class="small">olist_orders_dataset.csv</text><text x="60" y="198" class="small">第9914条记录（orders第9915行）</text>
+<text x="60" y="225" class="small">预计：2017-08-09 00:00:00</text><text x="60" y="248" class="small">签收：2017-08-24 23:18:12</text>
+<path class="arrow" d="M348 185H393"/>
+<rect class="box" x="396" y="112" width="306" height="150" rx="10"/>
+<text x="414" y="144" class="label">2. 暂存与质量检查（C）</text>
+<text x="414" y="173" class="small">stg_orders原始字符串＋来源序号</text><text x="414" y="200" class="small">NUL-01/04/05、DOM-07</text>
+<text x="414" y="227" class="small">TIM-04/05/06、CON-02</text><text x="414" y="250" class="small">本样例：无订单级质量标记</text>
+<path class="arrow" d="M702 185H747"/>
+<rect class="box" x="750" y="112" width="306" height="150" rx="10"/>
+<text x="768" y="144" class="label">3. 核心orders（A模型）</text>
+<text x="768" y="173" class="small">TRIM、LOWER、STR_TO_DATE</text><text x="768" y="200" class="small">两日期与源记录一致</text>
+<text x="768" y="227" class="small">order_status = delivered</text><text x="768" y="250" class="small">排除隔离行，不混用处理日期</text>
+<path class="arrow" d="M903 262V305"/>
+<rect class="box" x="750" y="308" width="306" height="150" rx="10"/>
+<text x="768" y="340" class="label">4. 指标候选视图（C）</text>
+<text x="768" y="369" class="small">v_delayed_orders_governed</text><text x="768" y="396" class="small">DATEDIFF(签收,预计) = 15天</text>
+<text x="768" y="423" class="small">delivered＋日期非空＋天数≥1</text><text x="768" y="449" class="small">当天签收为0；口径待组长确认</text>
+<path class="arrow" d="M750 383H706"/>
+<rect class="box" x="396" y="308" width="306" height="150" rx="10"/>
+<text x="414" y="340" class="label">5. 可查看结果 / B页面接口</text>
+<text x="414" y="369" class="small">delay_days=15 · quality_status=OK</text><text x="414" y="396" class="small">HTML目录已查看，SQL结果已取得</text>
+<text x="414" y="423" class="small">B真实业务页面接入：尚待完成</text><text x="414" y="449" class="small">trace视图可回溯两字段源值</text>
+<path class="arrow" d="M396 383H352"/>
+<rect class="box" x="42" y="308" width="306" height="150" rx="10"/>
+<text x="60" y="340" class="label">6. 批次观测（B接口 / C规则）</text>
+<text x="60" y="369" class="small">processing_log / 质量汇总</text><text x="60" y="396" class="small">同batch_id关联运行与规则</text>
+<text x="60" y="423" class="small">本批正延迟6534笔，行数守恒</text><text x="60" y="449" class="small">业务时间与2026处理时间分开</text>
+<rect x="42" y="500" width="1014" height="122" rx="9" fill="#e9effa"/>
+<text x="60" y="531" class="label">追溯查询：v_delay_days_trace（order_id → 源值、文件、序号、批次）</text>
+<text x="60" y="560" class="small">证据：EVIDENCE/run_outputs/verified_facts.json · metric_example；源指纹：EVIDENCE/source_manifest.csv</text>
+<text x="60" y="589" class="small muted">边界：暂存每批覆盖；失败后防错配可返回0行；历史原文快照、并发原子发布尚未实现。</text>
+<text x="42" y="651" class="small muted">日期天数口径：6534单；delivered时刻口径：7826单；旧视图：7827单。三者不可混用。</text>
+</svg>
