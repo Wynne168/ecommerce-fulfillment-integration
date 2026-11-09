@@ -1,0 +1,640 @@
+{
+  "database": "ecommerce_fulfillment",
+  "started": "2026-11-09 22:40:34",
+  "seller": "6560211a19b47992c3666cc44a7e94c0",
+  "seller_items": 2033,
+  "true_seller_items": 2033,
+  "order_id": "1b3190b2dfa9d789e1f14c05b647a14a",
+  "audit_before": 1,
+  "audit_after": 2,
+  "audit_rollback_risk": {
+    "query_allowed": true,
+    "before": 2,
+    "after": 2,
+    "issue_confirmed": true,
+    "detail": "成功，返回 1 行（已回滚，不留数据）"
+  },
+  "grants": {
+    "gov_cs_demo": [
+      "GRANT USAGE ON *.* TO `gov_cs_demo`@`localhost`",
+      "GRANT EXECUTE ON PROCEDURE `ecommerce_fulfillment`.`sp_cs_lookup_order` TO `gov_cs_demo`@`localhost`",
+      "GRANT `role_cs_agent`@`%` TO `gov_cs_demo`@`localhost`"
+    ],
+    "gov_merchant_demo": [
+      "GRANT USAGE ON *.* TO `gov_merchant_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`v_merchant_order_items` TO `gov_merchant_demo`@`localhost`",
+      "GRANT `role_merchant_ops`@`%` TO `gov_merchant_demo`@`localhost`"
+    ],
+    "gov_manager_demo": [
+      "GRANT USAGE ON *.* TO `gov_manager_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`batch_row_reconciliation` TO `gov_manager_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`metadata_catalog` TO `gov_manager_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`metric_lineage` TO `gov_manager_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`observability_events` TO `gov_manager_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`quality_check_summary` TO `gov_manager_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`v_manager_delay_by_state` TO `gov_manager_demo`@`localhost`",
+      "GRANT `role_platform_manager`@`%` TO `gov_manager_demo`@`localhost`"
+    ],
+    "gov_governance_demo": [
+      "GRANT USAGE ON *.* TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`customers` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE ON `ecommerce_fulfillment`.`data_quality_flags` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE ON `ecommerce_fulfillment`.`data_quarantine` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`geolocation` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE ON `ecommerce_fulfillment`.`metadata_catalog` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE ON `ecommerce_fulfillment`.`metric_lineage` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE ON `ecommerce_fulfillment`.`observability_events` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE ON `ecommerce_fulfillment`.`observability_rules` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`order_items` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`order_payments` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`orders` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`processing_log` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`products` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE ON `ecommerce_fulfillment`.`quality_check_results` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE ON `ecommerce_fulfillment`.`quality_check_summary` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE ON `ecommerce_fulfillment`.`quality_rules` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`reviews` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`sellers` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`v_delay_days_trace` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`v_delayed_orders_governed` TO `gov_governance_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`v_reviews_masked` TO `gov_governance_demo`@`localhost`",
+      "GRANT `role_data_governance`@`%` TO `gov_governance_demo`@`localhost`"
+    ],
+    "gov_etl_demo": [
+      "GRANT USAGE ON *.* TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE ON `ecommerce_fulfillment`.`batch_data_time_profile` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE ON `ecommerce_fulfillment`.`batch_row_reconciliation` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`customers` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`geolocation` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`order_items` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`order_payments` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`orders` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE ON `ecommerce_fulfillment`.`processing_log` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`products` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`reviews` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`sellers` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`stg_category_translation` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`stg_customers` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`stg_geolocation` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`stg_order_items` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`stg_order_payments` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`stg_orders` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`stg_products` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`stg_reviews` TO `gov_etl_demo`@`localhost`",
+      "GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON `ecommerce_fulfillment`.`stg_sellers` TO `gov_etl_demo`@`localhost`",
+      "GRANT `role_etl_runner`@`%` TO `gov_etl_demo`@`localhost`"
+    ],
+    "gov_auditor_demo": [
+      "GRANT USAGE ON *.* TO `gov_auditor_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`access_audit_log` TO `gov_auditor_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`observability_events` TO `gov_auditor_demo`@`localhost`",
+      "GRANT SELECT ON `ecommerce_fulfillment`.`processing_log` TO `gov_auditor_demo`@`localhost`",
+      "GRANT `role_auditor`@`%` TO `gov_auditor_demo`@`localhost`"
+    ]
+  },
+  "cases": [
+    {
+      "id": "S01",
+      "user": "gov_cs_demo",
+      "role": "role_cs_agent",
+      "desc": "客服经审计过程查询订单",
+      "sql": "CALL sp_cs_lookup_order('1b3190b2dfa9d789e1f14c05b647a14a')",
+      "expected": "允许",
+      "actual": "允许",
+      "passed": true,
+      "detail": "成功，返回 1 行",
+      "rows": [
+        [
+          "1b3190b2dfa9d789e1f14c05b647a14a",
+          "delivered",
+          "2018-02-23 14:57:35",
+          "2018-03-15 00:00:00",
+          "2018-09-19 23:24:07",
+          "188",
+          "rio de janeiro",
+          "RJ",
+          "227**",
+          "1",
+          "144.99",
+          "17.26",
+          "162.25"
+        ]
+      ]
+    },
+    {
+      "id": "S02",
+      "user": "gov_cs_demo",
+      "role": "role_cs_agent",
+      "desc": "客服绕过审计直接查视图",
+      "sql": "SELECT * FROM v_cs_order_lookup LIMIT 1",
+      "expected": "拒绝",
+      "actual": "拒绝",
+      "passed": true,
+      "detail": "拒绝 ERROR 1142: SELECT command denied to user 'gov_cs_demo'@'localhost' for table 'v_cs_order_lookup'",
+      "rows": []
+    },
+    {
+      "id": "S03",
+      "user": "gov_cs_demo",
+      "role": "role_cs_agent",
+      "desc": "客服直接读客户表",
+      "sql": "SELECT customer_unique_id FROM customers LIMIT 1",
+      "expected": "拒绝",
+      "actual": "拒绝",
+      "passed": true,
+      "detail": "拒绝 ERROR 1142: SELECT command denied to user 'gov_cs_demo'@'localhost' for table 'customers'",
+      "rows": []
+    },
+    {
+      "id": "S04",
+      "user": "gov_cs_demo",
+      "role": "role_cs_agent",
+      "desc": "客服修改订单状态",
+      "sql": "UPDATE orders SET order_status='delivered' WHERE order_id='1b3190b2dfa9d789e1f14c05b647a14a'",
+      "expected": "拒绝",
+      "actual": "拒绝",
+      "passed": true,
+      "detail": "拒绝 ERROR 1142: UPDATE command denied to user 'gov_cs_demo'@'localhost' for table 'orders'",
+      "rows": []
+    },
+    {
+      "id": "S05",
+      "user": "gov_merchant_demo",
+      "role": "role_merchant_ops",
+      "desc": "商家查询本卖家明细（行级视图）",
+      "sql": "SELECT COUNT(*), COUNT(DISTINCT seller_id), MIN(seller_id) FROM v_merchant_order_items",
+      "expected": "允许",
+      "actual": "允许",
+      "passed": true,
+      "detail": "成功，返回 1 行",
+      "rows": [
+        [
+          "2033",
+          "1",
+          "6560211a19b47992c3666cc44a7e94c0"
+        ]
+      ]
+    },
+    {
+      "id": "S06",
+      "user": "gov_merchant_demo",
+      "role": "role_merchant_ops",
+      "desc": "商家直接读全量订单明细",
+      "sql": "SELECT COUNT(*) FROM order_items",
+      "expected": "拒绝",
+      "actual": "拒绝",
+      "passed": true,
+      "detail": "拒绝 ERROR 1142: SELECT command denied to user 'gov_merchant_demo'@'localhost' for table 'order_items'",
+      "rows": []
+    },
+    {
+      "id": "S07",
+      "user": "gov_merchant_demo",
+      "role": "role_merchant_ops",
+      "desc": "商家读评价原文",
+      "sql": "SELECT review_comment_message FROM reviews LIMIT 1",
+      "expected": "拒绝",
+      "actual": "拒绝",
+      "passed": true,
+      "detail": "拒绝 ERROR 1142: SELECT command denied to user 'gov_merchant_demo'@'localhost' for table 'reviews'",
+      "rows": []
+    },
+    {
+      "id": "S08",
+      "user": "gov_manager_demo",
+      "role": "role_platform_manager",
+      "desc": "管理者查看按州聚合延迟率",
+      "sql": "SELECT COUNT(*), MIN(delivered_orders) FROM v_manager_delay_by_state",
+      "expected": "允许",
+      "actual": "允许",
+      "passed": true,
+      "detail": "成功，返回 1 行",
+      "rows": [
+        [
+          "27",
+          "41"
+        ]
+      ]
+    },
+    {
+      "id": "S09",
+      "user": "gov_manager_demo",
+      "role": "role_platform_manager",
+      "desc": "管理者查看质量与观测结果",
+      "sql": "SELECT COUNT(*) FROM quality_check_summary",
+      "expected": "允许",
+      "actual": "允许",
+      "passed": true,
+      "detail": "成功，返回 1 行",
+      "rows": [
+        [
+          "90"
+        ]
+      ]
+    },
+    {
+      "id": "S10",
+      "user": "gov_manager_demo",
+      "role": "role_platform_manager",
+      "desc": "管理者读取客户明细",
+      "sql": "SELECT * FROM customers LIMIT 1",
+      "expected": "拒绝",
+      "actual": "拒绝",
+      "passed": true,
+      "detail": "拒绝 ERROR 1142: SELECT command denied to user 'gov_manager_demo'@'localhost' for table 'customers'",
+      "rows": []
+    },
+    {
+      "id": "S11",
+      "user": "gov_governance_demo",
+      "role": "role_data_governance",
+      "desc": "治理角色只读业务表",
+      "sql": "SELECT COUNT(*) FROM orders",
+      "expected": "允许",
+      "actual": "允许",
+      "passed": true,
+      "detail": "成功，返回 1 行",
+      "rows": [
+        [
+          "99441"
+        ]
+      ]
+    },
+    {
+      "id": "S12",
+      "user": "gov_governance_demo",
+      "role": "role_data_governance",
+      "desc": "治理角色更新隔离区处置状态",
+      "sql": "UPDATE data_quarantine SET resolution_note=resolution_note WHERE quarantine_id=-1",
+      "expected": "允许",
+      "actual": "允许",
+      "passed": true,
+      "detail": "成功，影响 0 行",
+      "rows": []
+    },
+    {
+      "id": "S13",
+      "user": "gov_governance_demo",
+      "role": "role_data_governance",
+      "desc": "治理角色删除业务数据",
+      "sql": "DELETE FROM orders WHERE order_id='1b3190b2dfa9d789e1f14c05b647a14a'",
+      "expected": "拒绝",
+      "actual": "拒绝",
+      "passed": true,
+      "detail": "拒绝 ERROR 1142: DELETE command denied to user 'gov_governance_demo'@'localhost' for table 'orders'",
+      "rows": []
+    },
+    {
+      "id": "S14",
+      "user": "gov_governance_demo",
+      "role": "role_data_governance",
+      "desc": "治理角色篡改审计日志",
+      "sql": "DELETE FROM access_audit_log",
+      "expected": "拒绝",
+      "actual": "拒绝",
+      "passed": true,
+      "detail": "拒绝 ERROR 1142: DELETE command denied to user 'gov_governance_demo'@'localhost' for table 'access_audit_log'",
+      "rows": []
+    },
+    {
+      "id": "S15",
+      "user": "gov_etl_demo",
+      "role": "role_etl_runner",
+      "desc": "运行账号写入运行记录（事务回滚）",
+      "sql": "INSERT INTO processing_log (batch_id, process_name, start_time, status) VALUES ('sectest','security_probe',NOW(),'success')",
+      "expected": "允许",
+      "actual": "允许",
+      "passed": true,
+      "detail": "成功，影响 1 行（已回滚，不留数据）",
+      "rows": []
+    },
+    {
+      "id": "S16",
+      "user": "gov_etl_demo",
+      "role": "role_etl_runner",
+      "desc": "运行账号读取审计日志",
+      "sql": "SELECT * FROM access_audit_log LIMIT 1",
+      "expected": "拒绝",
+      "actual": "拒绝",
+      "passed": true,
+      "detail": "拒绝 ERROR 1142: SELECT command denied to user 'gov_etl_demo'@'localhost' for table 'access_audit_log'",
+      "rows": []
+    },
+    {
+      "id": "S17",
+      "user": "gov_etl_demo",
+      "role": "role_etl_runner",
+      "desc": "运行账号删除审计日志",
+      "sql": "DELETE FROM access_audit_log",
+      "expected": "拒绝",
+      "actual": "拒绝",
+      "passed": true,
+      "detail": "拒绝 ERROR 1142: DELETE command denied to user 'gov_etl_demo'@'localhost' for table 'access_audit_log'",
+      "rows": []
+    },
+    {
+      "id": "S18",
+      "user": "gov_auditor_demo",
+      "role": "role_auditor",
+      "desc": "审计员读取审计日志",
+      "sql": "SELECT db_user, action, record_key, result_rows FROM access_audit_log ORDER BY audit_id DESC LIMIT 1",
+      "expected": "允许",
+      "actual": "允许",
+      "passed": true,
+      "detail": "成功，返回 1 行",
+      "rows": [
+        [
+          "gov_cs_demo@localhost",
+          "LOOKUP_ORDER",
+          "1b3190b2dfa9d789e1f14c05b647a14a",
+          "1"
+        ]
+      ]
+    },
+    {
+      "id": "S19",
+      "user": "gov_auditor_demo",
+      "role": "role_auditor",
+      "desc": "审计员读取订单明细",
+      "sql": "SELECT * FROM orders LIMIT 1",
+      "expected": "拒绝",
+      "actual": "拒绝",
+      "passed": true,
+      "detail": "拒绝 ERROR 1142: SELECT command denied to user 'gov_auditor_demo'@'localhost' for table 'orders'",
+      "rows": []
+    }
+  ],
+  "privacy": {
+    "comments_nonempty": 40641,
+    "raw_phone": 2,
+    "masked_phone_residual": 0,
+    "raw_email": 0,
+    "masked_email_residual": 0,
+    "raw_cpf": 0,
+    "masked_cpf_residual": 0,
+    "raw_url": 2,
+    "masked_url_residual": 0,
+    "masked_samples": [
+      [
+        "266d46166f2642011b1909c9d4cd779d",
+        "comprei o produto pela cor ilustrada pelo site da loja americana, no site mostra ser preto [URL] quando o produto chegou aqui veio todos com a mesma cor, tabaco [URL]"
+      ],
+      [
+        "75b2a12fd743171a0213b74dfa69db7d",
+        "Aguardo o recebimento da minha encomenda com urgência...  No momento estou Insatisfeita com a empresa.  [PHONE]  [PHONE]"
+      ],
+      [
+        "dc29a151c9cd239ec94dc30405348908",
+        "Loja parceira de [URL] e por isso merecedora de crédito."
+      ],
+      [
+        "f87e60d60e2e4f3e9e761a395a73fc56",
+        "Faltou item descrito  Me ligue [PHONE]"
+      ]
+    ],
+    "k_zip5_city_state": {
+      "rows_in_groups_k_lt_5": 18879,
+      "share": 0.189851,
+      "groups": 15034,
+      "groups_k_lt_5": 8462,
+      "total_rows": 99441
+    },
+    "k_zip3_city_state": {
+      "rows_in_groups_k_lt_5": 5359,
+      "share": 0.053891,
+      "groups": 4569,
+      "groups_k_lt_5": 2745,
+      "total_rows": 99441
+    },
+    "k_zip3_state": {
+      "rows_in_groups_k_lt_5": 59,
+      "share": 0.000593,
+      "groups": 851,
+      "groups_k_lt_5": 24,
+      "total_rows": 99441
+    },
+    "k_state": {
+      "rows_in_groups_k_lt_5": 0,
+      "share": 0.0,
+      "groups": 27,
+      "groups_k_lt_5": 0,
+      "total_rows": 99441
+    },
+    "distinct_customers": 96096,
+    "repeat_customers": 2997,
+    "state_delay": [
+      [
+        "AL",
+        "397",
+        "85",
+        "0.2141",
+        "9.54"
+      ],
+      [
+        "MA",
+        "717",
+        "125",
+        "0.1743",
+        "10.50"
+      ],
+      [
+        "SE",
+        "335",
+        "51",
+        "0.1522",
+        "16.20"
+      ],
+      [
+        "PI",
+        "476",
+        "66",
+        "0.1387",
+        "13.35"
+      ],
+      [
+        "CE",
+        "1279",
+        "176",
+        "0.1376",
+        "15.18"
+      ],
+      [
+        "RR",
+        "41",
+        "5",
+        "0.1220",
+        "36.40"
+      ],
+      [
+        "BA",
+        "3256",
+        "396",
+        "0.1216",
+        "12.02"
+      ],
+      [
+        "RJ",
+        "12350",
+        "1495",
+        "0.1211",
+        "13.52"
+      ],
+      [
+        "PA",
+        "946",
+        "106",
+        "0.1121",
+        "12.82"
+      ],
+      [
+        "ES",
+        "1995",
+        "214",
+        "0.1073",
+        "11.30"
+      ],
+      [
+        "PB",
+        "517",
+        "54",
+        "0.1044",
+        "10.33"
+      ],
+      [
+        "TO",
+        "274",
+        "27",
+        "0.0985",
+        "6.52"
+      ],
+      [
+        "MS",
+        "701",
+        "68",
+        "0.0970",
+        "8.34"
+      ],
+      [
+        "PE",
+        "1593",
+        "153",
+        "0.0960",
+        "11.97"
+      ],
+      [
+        "RN",
+        "474",
+        "44",
+        "0.0928",
+        "14.48"
+      ],
+      [
+        "SC",
+        "3546",
+        "291",
+        "0.0821",
+        "8.31"
+      ],
+      [
+        "GO",
+        "1957",
+        "128",
+        "0.0654",
+        "11.37"
+      ],
+      [
+        "RS",
+        "5344",
+        "325",
+        "0.0608",
+        "10.24"
+      ],
+      [
+        "MT",
+        "886",
+        "53",
+        "0.0598",
+        "10.64"
+      ],
+      [
+        "DF",
+        "2080",
+        "118",
+        "0.0567",
+        "7.42"
+      ],
+      [
+        "MG",
+        "11354",
+        "519",
+        "0.0457",
+        "8.40"
+      ],
+      [
+        "SP",
+        "40494",
+        "1820",
+        "0.0449",
+        "8.33"
+      ],
+      [
+        "PR",
+        "4923",
+        "199",
+        "0.0404",
+        "8.32"
+      ],
+      [
+        "AC",
+        "80",
+        "3",
+        "0.0375",
+        "18.67"
+      ],
+      [
+        "AP",
+        "67",
+        "2",
+        "0.0299",
+        "72.50"
+      ],
+      [
+        "RO",
+        "243",
+        "7",
+        "0.0288",
+        "5.57"
+      ],
+      [
+        "AM",
+        "145",
+        "4",
+        "0.0276",
+        "30.25"
+      ]
+    ]
+  },
+  "server": {
+    "default_password_lifetime": "0",
+    "general_log": "OFF",
+    "have_ssl": "YES",
+    "local_infile": "OFF",
+    "require_secure_transport": "OFF",
+    "secure_file_priv": "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\"
+  },
+  "plugins": [],
+  "secrets": [
+    [
+      "SRC\\import_config.json",
+      2,
+      "mysql+pymysql://root:******@"
+    ],
+    [
+      "TESTS\\test_config.json",
+      2,
+      "mysql+pymysql://root:******@"
+    ]
+  ],
+  "gitignore": false,
+  "demo_users_remaining": []
+}
