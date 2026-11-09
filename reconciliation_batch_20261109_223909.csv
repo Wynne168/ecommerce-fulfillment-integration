@@ -1,0 +1,10 @@
+﻿batch_id,table_name,source_file,source_rows,staged_rows,quarantined_rows,core_rows,expected_core_rows,recon_status,note
+batch_20261109_223909,category_translation,product_category_name_translation.csv,71,71,0,,,OK,A 的模型无对应核心表，仅用于 REF-11 检查
+batch_20261109_223909,customers,olist_customers_dataset.csv,99441,99441,0,99441,99441,OK,
+batch_20261109_223909,geolocation,olist_geolocation_dataset.csv,1000163,1000163,0,19015,19015,OK,DUP-08 修正：按邮编前缀聚合，期望行数 = 去重后邮编数
+batch_20261109_223909,order_items,olist_order_items_dataset.csv,112650,112650,0,112650,112650,OK,
+batch_20261109_223909,order_payments,olist_order_payments_dataset.csv,103886,103886,0,103886,103886,OK,
+batch_20261109_223909,orders,olist_orders_dataset.csv,99441,99441,0,99441,99441,OK,
+batch_20261109_223909,products,olist_products_dataset.csv,32951,32951,0,32951,32951,OK,
+batch_20261109_223909,reviews,olist_order_reviews_dataset.csv,99224,99224,814,98410,98410,OK,
+batch_20261109_223909,sellers,olist_sellers_dataset.csv,3095,3095,0,3095,3095,OK,
